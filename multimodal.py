@@ -12,28 +12,18 @@ from functools import partial
 import keras.backend as K
 from itertools import product
 
+
 class Multimodal():
 
-	def __init__(self, n_classes, nucleus_features=10, alpha=0.001):
+	def __init__(self, n_classes, nucleus_features, alpha=0.001):
+		# nucleus_features - Non-image features dimensions
 		self.n_classes = n_classes
 		self.nucleus_features = nucleus_features
 		self.lr = alpha
 		self.callbacks = None
-		self.w_array = self.get_w_array()
-		print(self.w_array.shape)
 
-	def get_w_array(self):
-		w_array = [[1,1,1,1,1.1,1,1.1,1,1,1],
-				[1,1,1,1,1,1.1,1.1,1,1,1],
-				[1,1,1,1.1,1,1,1.1,1,1,1],
-				[1,1,1.2,1,1.1,1,1.2,1,1,1],
-				[1,1,1,1,1,1.1,1.2,1,1,1],
-				[1,1,1,1,1.2,1,1.2,1,1,1],
-				[1,1,1,1,1.1,1.2,1.2,1,1,1],
-				[1,1,1,1,1,1,1.2,1,1,1],
-				[1,1,1,1,1,1,1.2,1,1,1],
-				[1,1,1,1,1,1,1,1,1,1]]
-		return np.array(w_array)
+		# Define weights array between classes. This is used in weighted cross entropy function. Use it if necessary
+		self.w_array = self.get_w_array()
 
 	def save_weights(self,path):
 		self.model.save_weights(path)
@@ -229,6 +219,20 @@ class Multimodal():
 
 	def plot_model(self, filepath):
 		plot_model(self.model, to_file=filepath)
+
+
+	def get_w_array(self):
+		w_array = [[1,1,1,1,1.1,1,1.1,1,1,1],
+				[1,1,1,1,1,1.1,1.1,1,1,1],
+				[1,1,1,1.1,1,1,1.1,1,1,1],
+				[1,1,1.2,1,1.1,1,1.2,1,1,1],
+				[1,1,1,1,1,1.1,1.2,1,1,1],
+				[1,1,1,1,1.2,1,1.2,1,1,1],
+				[1,1,1,1,1.1,1.2,1.2,1,1,1],
+				[1,1,1,1,1,1,1.2,1,1,1],
+				[1,1,1,1,1,1,1.2,1,1,1],
+				[1,1,1,1,1,1,1,1,1,1]]
+		return np.array(w_array)
 
 	def weighted_crossentropy(self, y_true, y_pred):
 		nb_cl = self.n_classes
