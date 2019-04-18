@@ -7,4 +7,6 @@ For example - if we are training biomedical images for cancer diagnosis, additio
 
 **Modify the neural network parameters according to your use case/training data.**
 
+Built it to classify nuclei images. Change the variable names according to the problem
+
 ### _Uses Keras Libraries_
