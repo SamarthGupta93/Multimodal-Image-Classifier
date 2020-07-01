@@ -1,5 +1,5 @@
 # Multimodal-Image-Classifier
-CNN based Image classifier for multimodal input (Image + non-Image features)
+CNN based Image classifier for multimodal input (Two/multiple different data formats)
 
 This is a python Class to build an image classifier having multimodal data. Particularly useful if we have additional non-image information about the images in our training set.
 
